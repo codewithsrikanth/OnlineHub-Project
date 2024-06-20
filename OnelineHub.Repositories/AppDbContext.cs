@@ -18,7 +18,16 @@ namespace OnelineHub.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=.;database=OnlineHubDB;TrustServerCertificate=True;Trusted_Connection=true;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("server=.;database=OnlineHubDB;TrustServerCertificate=True;Trusted_Connection=true;");
+            }
+            base.OnConfiguring(optionsBuilder);           
+            
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
     }
 }
