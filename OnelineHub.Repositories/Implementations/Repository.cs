@@ -5,6 +5,7 @@ namespace OnelineHub.Repositories.Implementations
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        //Constructor
         protected DbContext _appDbContext;
         public Repository(DbContext appDbContext)
         {

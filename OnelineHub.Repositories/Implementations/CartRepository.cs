@@ -6,6 +6,7 @@ namespace OnelineHub.Repositories.Implementations
 {
     public class CartRepository : Repository<Cart>, ICartRepository
     {
+        //Property Injection
         private AppDbContext appContext
         {
             get
@@ -13,29 +14,59 @@ namespace OnelineHub.Repositories.Implementations
                 return _appDbContext as AppDbContext;
             }
         }
-
-        public CartRepository(DbContext db):base(db)
+        public CartRepository(DbContext db) : base(db)
         {
-            
+
         }
         public Cart GetCart(Guid cartId)
         {
-            return appContext.Carts.Include("Items").Where(x=>x.Id == cartId && x.IsActive==true).FirstOrDefault();
+            return appContext.Carts.Include("Items").Where(x => x.Id == cartId && x.IsActive == true).FirstOrDefault();
         }
 
         public int DeleteItem(Guid cartId, int itemId)
         {
-            throw new NotImplementedException();
+            var item = appContext.CartItems.Where(x => x.CartId == cartId && x.Id == itemId).FirstOrDefault();
+            if (item != null)
+            {
+                appContext.CartItems.Remove(item);
+                return appContext.SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public int UpdateQuanity(Guid cartId, int itemId, int quantity)
         {
-            throw new NotImplementedException();
+            bool flag = false;
+            var cart = GetCart(cartId);
+            if (cart != null)
+            {
+                for (int i = 0; i < cart.Items.Count; i++)
+                {
+                    if (cart.Items[i].Id == itemId)
+                    {
+                        flag = true;
+                        //Minus the quantity
+                        if (quantity < 0 && cart.Items[i].Quantity > 1)
+                            cart.Items[i].Quantity += quantity;
+                        else if(quantity > 0)
+                            cart.Items[i].Quantity += quantity;
+                        break;
+                    }
+                }
+                if (flag)
+                    return appContext.SaveChanges();
+            }
+            return 0;
         }
 
         public int UpdateCart(Guid cartId, int userId)
         {
-            throw new NotImplementedException();
+            Cart cart = GetCart(cartId);
+            cart.UserId = userId;
+            return appContext.SaveChanges();
         }
     }
 }
