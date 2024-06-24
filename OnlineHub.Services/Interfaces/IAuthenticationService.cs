@@ -6,7 +6,7 @@ namespace OnlineHub.Services.Interfaces
     {
         bool CreateUser(User user, string password);
         Task<bool> SignOut();
-        User AuthenticateUser(string username, string password);
+        User? AuthenticateUser(string username, string password);
         User GetUser(string username);
     }
 }

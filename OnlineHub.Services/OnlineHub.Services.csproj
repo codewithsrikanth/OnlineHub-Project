@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnelineHub.Repositories\OnelineHub.Repositories.csproj" />
     <ProjectReference Include="..\OnlineHub.Entities\OnlineHub.Entities.csproj" />
   </ItemGroup>
 

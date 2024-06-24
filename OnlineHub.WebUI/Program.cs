@@ -1,3 +1,6 @@
+using OnlineHub.Services.Configuration;
+using OnlineHub.WebUI.Configuration;
+
 namespace OnlineHub.WebUI
 {
     public class Program
@@ -5,9 +8,11 @@ namespace OnlineHub.WebUI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            ConfigureRepositories.AddServices(builder.Services, builder.Configuration);
+            ConfigurationDependencies.AddServices(builder.Services);
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            
 
             var app = builder.Build();
 

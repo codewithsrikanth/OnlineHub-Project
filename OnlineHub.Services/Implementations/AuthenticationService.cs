@@ -15,9 +15,9 @@ namespace OnlineHub.Services.Implementations
             this._userManager = _userManager;
             this._roleManager = _roleManager;
         }
-        public User AuthenticateUser(string username, string password)
+        public User? AuthenticateUser(string username, string password)
         {
-            var result = _signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false).Result;
+            var result = _signInManager.PasswordSignInAsync(username, password, false,lockoutOnFailure:false).Result;
             if(result.Succeeded)
             {
                 var user = _userManager.FindByNameAsync(username).Result;
