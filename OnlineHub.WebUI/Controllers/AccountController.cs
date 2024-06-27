@@ -60,5 +60,15 @@ namespace OnlineHub.WebUI.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> Signout()
+        {
+            await _authService.SignOut();
+            return RedirectToAction("LogoutComplete");
+        }
+        public IActionResult LogoutComplete()
+        {
+            return View();
+        }
     }
 }
