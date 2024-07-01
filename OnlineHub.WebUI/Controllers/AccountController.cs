@@ -70,5 +70,9 @@ namespace OnlineHub.WebUI.Controllers
         {
             return View();
         }
+        public ActionResult Unauthorize()
+        {
+            return View();
+        }
     }
 }

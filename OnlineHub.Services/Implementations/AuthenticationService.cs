@@ -23,6 +23,8 @@ namespace OnlineHub.Services.Implementations
                 var user = _userManager.FindByNameAsync(username).Result;
                 var roles = _userManager.GetRolesAsync(user).Result;
                 user.Roles = roles.ToArray();
+
+
                 return user;
             }
             return null;
