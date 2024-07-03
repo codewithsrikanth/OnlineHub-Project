@@ -15,4 +15,8 @@
     <ProjectReference Include="..\OnlineHub.Services\OnlineHub.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
