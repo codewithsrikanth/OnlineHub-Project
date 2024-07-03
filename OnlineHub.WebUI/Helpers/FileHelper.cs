@@ -25,7 +25,7 @@ namespace OnlineHub.WebUI.Helpers
                 Directory.CreateDirectory(uploads);
 
             //Save File
-            string filename = GenerateFileName(file.FileName);
+           string filename = GenerateFileName(file.FileName);
             var fileStream = new FileStream(Path.Combine(uploads, filename), FileMode.Create);
             file.CopyToAsync(fileStream);
             return "/images/" + filename;
